@@ -31,25 +31,6 @@ app.config['MONGODB_PASSWORD'] = 'WinniePooh'
 db = MongoEngine()
 db.init_app(app)
 
-# def login_required(f):
-#     @wraps(f)
-#     def decorated_function(*args, **kwargs):
-#         auth_header = (request.headers.get('Authorization'))
-#         if auth_header is None:
-#             return jsonify({STATUS_CODE:400, RESPONSE: BAD_REQUEST}), 400
-#         bearer, access_token = auth_header.split()
-#         #
-#         if bearer != 'Bearer':
-#             return jsonify({STATUS_CODE:401, RESPONSE: AUTHORIZATION_REQUIRED}), 401
-#         # # sending request to UserService to check access tokens
-#         response = send_request('http://localhost:5001/api/check_authorization/' + access_token, method='GET', json={})
-#         if response['statusCode'] == 200:
-#             return f(*args, **kwargs)
-#         else:
-#             return jsonify(response)
-#     return decorated_function
-
-
 def only_admin(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
