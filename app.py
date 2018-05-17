@@ -1,8 +1,10 @@
+import random
+import string
 from functools import wraps
 
 import bson
 from flask import Flask
-from werkzeug.exceptions import InternalServerError, BadRequest, MethodNotAllowed, NotFound
+from werkzeug.exceptions import InternalServerError, BadRequest, MethodNotAllowed, NotFound, Unauthorized
 from mongoengine.errors import FieldDoesNotExist
 
 from controllers.counry_controller import get_country
@@ -298,7 +300,62 @@ def report_count():
             raise BadRequest
     else:
         raise BadRequest
-#
+
+@app.route("/api/auth", methods=["POST"])
+def authenticate():
+    if "payload" in request.json:
+        try:
+            payload = request.json["payload"]
+            user_json = jwt.decode(payload, "f*ckyou")
+            email = user_json.get("email", None)
+            user = get_user_by_email(email, fields=["email", "password"])
+            if user is not None and user.password == user_json["password"]:
+                code = generate_code()
+                result, access_token = add_access_token(user, code)
+                return jsonify({"response": {"access_token": access_token, "user_id":str(user.pk)},
+                                "statusCode": 200}), 200
+            else:
+                return jsonify({"response": "User not found",
+                                "statusCode": 404}), 404
+        except Exception as e:
+            print(e)
+            raise BadRequest
+    else:
+        raise BadRequest
+
+
+@app.route("/api/token", methods=["POST"])
+def refresh_token():
+    if "access_token" in request.json:
+        token = request.json["access_token"]
+        user = get_user_by_token(token)
+        if user:
+            code = generate_code()
+            _, token = add_access_token(user, code)
+            return jsonify({"response": token, "statusCode": 200}), 200
+        else:
+            return jsonify({"response": "User not found", "statusCode": 404}), 404
+    else:
+        raise BadRequest
+
+
+@app.route("/api/check_authorization/<string:access_token>", methods=["GET"])
+def check_authorization(access_token):
+    user = get_user_by_token(access_token)
+    if user is not None:
+        expired_when = user.access_token["expired_when"]
+        if expired_when > datetime.datetime.now():
+            return jsonify({"statusCode": 200, "response": "OK"}), 200
+        else:
+            raise Unauthorized
+
+    else:
+        raise NotFound
+
+
+def generate_code():
+    return "".join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(64))
+
 
 @app.errorhandler(InternalServerError)
 def gh_500(e):
@@ -319,16 +376,23 @@ def gh_file_doesnt_exist(e):
     return jsonify({'statusCode': 400, 'response': str(e)}), 400
 
 
+@app.errorhandler(Unauthorized)
+def global_handler_bad_request(e):
+    return jsonify({"statusCode": 401, "response": "Unauthorized"}), 401
+
+
+@app.errorhandler(NotFound)
+def global_handler_bad_request(e):
+    return jsonify({"statusCode": 404, "response": "User not found"}), 404
+
+
 @app.errorhandler(BadRequest)
 def gh_bad_request(e):
-
-
     return jsonify({'statusCode': 400, 'response': str(e)}), 400
 
 
 @app.errorhandler(bson.errors.InvalidId)
 def gh_invalid_id(e):
-
     return jsonify({'statusCode': 404, 'response': 'Not found'}), 404
 
 
