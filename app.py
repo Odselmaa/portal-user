@@ -9,7 +9,6 @@ from mongoengine.errors import FieldDoesNotExist
 
 from controllers.counry_controller import get_country
 from controllers.gender_controller import get_gender
-from models import *
 from flask import jsonify, request
 import jwt
 import requests
