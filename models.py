@@ -271,7 +271,8 @@ class User(Document):
 
         if 'friends' in data:
             for i, friend in enumerate(data['friends']):
-                data['friends'][i] = User.objects(id=friend).only(*['firstname', 'lastname', 'department']).first().to_mongo()
+                user = User.objects(id=friend).only(*['firstname', 'lastname', 'department']).first()
+                data['friends'][i] = json.loads(user.to_json(lang))
 
         return json_util.dumps(data)
 
