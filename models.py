@@ -230,6 +230,8 @@ class User(Document):
     news_tags = ListField(StringField())
     meta = {'queryset_class': CustomQuerySet}
 
+
+
     def to_json(self, lang='en'):
         data = self.to_mongo()
         data['_id'] = str(self.id)
@@ -267,9 +269,9 @@ class User(Document):
         if 'gender' in data:
             data['gender'] = self.gender.get(lang)
 
-        # if 'friends' in data:
-        #     for friend in data['friends']:
-
+        if 'friends' in data:
+            for i, friend in enumerate(data['friends']):
+                data['friends'][i] = User.objects(id=friend).only(*['firstname', 'lastname']).first()
 
         return json_util.dumps(data)
 
