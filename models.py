@@ -220,7 +220,7 @@ class User(Document):
     phone = StringField(max_length=15)
     bio = StringField(max_length=256)
     languages = ListField(ReferenceField(Language))
-    friends = ListField(ReferenceField(User), max_length=1000)
+    friends = ListField(StringField(), max_length=1000)
     photos = ListField(max_length=1000)
     profile = StringField()
     access_token = EmbeddedDocumentField(AccessToken)
