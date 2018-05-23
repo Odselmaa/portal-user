@@ -1,1 +1,1 @@
-web: gunicorn app:app --log-file=-
+web: gunicorn app:app WEB_CONCURRENCY=4 --timeout 10
