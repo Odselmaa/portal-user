@@ -358,20 +358,17 @@ def generate_code():
 
 @app.errorhandler(InternalServerError)
 def gh_500(e):
-
+    print(e)
     return jsonify({'statusCode': 500, 'response': str(e)}), 500
 
 
 @app.errorhandler(Exception)
 def gh_ex(e):
-
     return jsonify({'statusCode': 500, 'response': str(e)}), 500
 
 
 @app.errorhandler(FieldDoesNotExist)
 def gh_file_doesnt_exist(e):
-
-
     return jsonify({'statusCode': 400, 'response': str(e)}), 400
 
 
