@@ -115,9 +115,8 @@ def many_user():
         payload = request.json
 
         if 'payload' in payload:
+            print(payload)
             user_json = jwt.decode(payload['payload'], 'f*ckyou', algorithms=['HS256'])
-            print(user_json)
-
             del user_json['iat']
             if get_user_by_email(email=user_json['email'], fields=[]):
                 return jsonify({'error': 'Email is already registered',
@@ -315,8 +314,7 @@ def authenticate():
             if user is not None and user.password == user_json["password"]:
                 code = generate_code()
                 result, access_token = add_access_token(user, code)
-                access_token['user_id'] = str(user.pk)
-                return jsonify({"response": {"access_token": access_token},
+                return jsonify({"response": {"access_token": access_token, "user_id":str(user.pk)},
                                 "statusCode": 200}), 200
             else:
                 return jsonify({"response": "User not found",
