@@ -306,6 +306,8 @@ def authenticate():
     if "payload" in request.json:
         try:
             payload = request.json["payload"]
+            print(payload)
+
             user_json = jwt.decode(payload, "f*ckyou")
             email = user_json.get("email", None)
             user = get_user_by_email(email, fields=["email", "password"])
