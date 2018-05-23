@@ -115,6 +115,7 @@ def many_user():
         payload = request.json
 
         if 'payload' in payload:
+            print(payload)
             user_json = jwt.decode(payload['payload'], 'f*ckyou')
             del user_json['iat']
             if get_user_by_email(email=user_json['email'], fields=[]):
