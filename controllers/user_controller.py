@@ -42,7 +42,7 @@ def update_user(payload = {}):
 
 
 def get_user_by_id(_id, fields=[]):
-    return User.objects(pk=_id).only(*fields).exclude('password').first()
+    return User.objects(pk=_id).only(*fields).exclude('password').exclude("access_token").first()
 
 
 def get_user_by_email(email, fields=[]):
