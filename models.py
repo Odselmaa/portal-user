@@ -40,6 +40,14 @@ class AccessToken(EmbeddedDocument):
     created_when = DateTimeField(required=True, default=datetime.datetime.now())
     expired_when = DateTimeField(required=True)
 
+    meta = {'queryset_class': CustomQuerySet}
+
+    def to_json(self):
+        data = self.to_mongo()
+        data['expired_when'] = data['expired_when']['$date']
+        data['created_when'] = data['created_when']['$date']
+        return json_util.dumps(data)
+
 
 class Language(Document):
     _id = StringField(primary_key=True)
