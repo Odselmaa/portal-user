@@ -309,12 +309,11 @@ def authenticate():
 
             user_json = jwt.decode(payload, "f*ckyou", algorithms=['HS256'])
             email = user_json.get("email", None)
-            print(user_json)
-
             user = get_user_by_email(email, fields=["email", "password"])
             if user is not None and user.password == user_json["password"]:
                 code = generate_code()
                 result, access_token = add_access_token(user, code)
+                print(str(access_token))
                 return jsonify({"response": {"access_token": access_token, "user_id":str(user.pk)},
                                 "statusCode": 200}), 200
             else:
