@@ -44,9 +44,9 @@ class AccessToken(EmbeddedDocument):
 
     def to_json(self):
         data = self.to_mongo()
-        print(data)
-        data['expired_when'] = data['expired_when']['$date']
-        data['created_when'] = data['created_when']['$date']
+        print(self)
+        data['expired_when'] = data['expired_when'].timestamp()
+        data['created_when'] = data['created_when'].timestamp()
         return json_util.dumps(data)
 
 
