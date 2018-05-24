@@ -313,7 +313,7 @@ def authenticate():
             if user is not None and user.password == user_json["password"]:
                 code = generate_code()
                 result, access_token = add_access_token(user, code)
-                return jsonify({"response": {"access_token": json.loads(access_token.to_json()), "user_id":str(user.pk)},
+                return jsonify({"response": {"access_token": access_token, "user_id":str(user.pk)},
                                 "statusCode": 200}), 200
             else:
                 return jsonify({"response": "User not found",
