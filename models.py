@@ -278,10 +278,10 @@ class User(Document):
         if 'gender' in data:
             data['gender'] = self.gender.get(lang)
 
-        if 'friends' in data:
-            for i, friend in enumerate(data['friends']):
-                user = User.objects(id=friend).only(*['firstname', 'lastname', 'department']).first()
-                data['friends'][i] = json.loads(user.to_json(lang))
+        # if 'friends' in data:
+        #     for i, friend in enumerate(data['friends']):
+        #         user = User.objects(id=friend).only(*['firstname', 'lastname', 'department']).first()
+        #         data['friends'][i] = json.loads(user.to_json(lang))
 
         return json_util.dumps(data)
 
