@@ -301,6 +301,7 @@ def report_count():
     else:
         raise BadRequest
 
+
 @app.route("/api/auth", methods=["POST"])
 def authenticate():
     if "payload" in request.json:
@@ -310,6 +311,7 @@ def authenticate():
             user_json = jwt.decode(payload, "f*ckyou", algorithms=['HS256'])
             email = user_json.get("email", None)
             user = get_user_by_email(email, fields=["email", "password"])
+            print(user_json)
             if user is not None and user.password == user_json["password"]:
                 code = generate_code()
                 result, access_token = add_access_token(user, code)
@@ -415,4 +417,4 @@ def send_request(URL, method, json):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5004)

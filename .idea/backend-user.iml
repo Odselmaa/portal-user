@@ -6,5 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="backend-review" />
     <orderEntry type="module" module-name="backend-chat" />
+    <orderEntry type="module" module-name="backed-auth" />
+    <orderEntry type="module" module-name="backend-news" />
   </component>
 </module>
