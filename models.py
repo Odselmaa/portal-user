@@ -138,8 +138,8 @@ class Department(Document):
     description = StringField()
     translation = ListField(EmbeddedDocumentField(TranslationUnit))
     reviews = ListField(StringField(), default=[])
-    university = IntField()
-    university.db_field = 'uni_id'
+    # university = IntField()
+    # university.db_field = 'uni_id'
 
     def get(self, lang = 'en'):
         if lang == 'en':
@@ -217,7 +217,7 @@ class User(Document):
     lastname = StringField(required=True, max_length=512)
     role = ReferenceField(Role)
     country = ReferenceField(Country)
-    university = ReferenceField(University)
+    # university = ReferenceField(University)
     department = ReferenceField(Department)
     chair = ReferenceField(Chair)
     blocked = BooleanField()
