@@ -8,5 +8,6 @@
     <orderEntry type="module" module-name="backend-chat" />
     <orderEntry type="module" module-name="backed-auth" />
     <orderEntry type="module" module-name="backend-news" />
+    <orderEntry type="module" module-name="gateway" />
   </component>
 </module>

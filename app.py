@@ -367,10 +367,11 @@ def gh_500(e):
     print(e)
     return jsonify({'statusCode': 500, 'response': str(e)}), 500
 
-
-@app.errorhandler(Exception)
-def gh_ex(e):
-    return jsonify({'statusCode': 500, 'response': str(e)}), 500
+#
+# @app.errorhandler(Exception)
+# def gh_ex(e):
+#     print(e)
+#     return jsonify({'statusCode': 500, 'response': str(e)}), 500
 
 
 @app.errorhandler(FieldDoesNotExist)
