@@ -22,7 +22,7 @@ def update_user(payload = {}):
         if user is not None:
             user = user.first()
 
-            if 'country' in payload: payload['country'] = Country(pk=int(payload['country']))
+            if 'country' in payload: payload['country'] = Country(pk=payload['country'])
             if 'gender' in payload and payload['gender'] is not None: payload['gender'] = Gender(pk=int(payload['gender']))
             if 'languages' in payload: payload['languages'] = [Language(pk=lang["_id"]) for lang in payload['languages']]
             if 'department' in payload and payload['department'] is not None: payload['department'] = Department(pk=int(payload['department']['_id']))
