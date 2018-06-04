@@ -14,24 +14,23 @@ from controllers.language_controller import get_language_by_id
 from models import User, AccessToken, Gender, Chair, Department, Language, Country
 
 
-def update_user(payload = {}):
+def update_user(payload = {}, fields = []):
     if 'user_id' in payload:
         user_id = payload.pop('user_id')
         print(payload)
+
         user = User.objects(pk=user_id)
         if user is not None:
             user = user.first()
 
             if 'country' in payload: payload['country'] = Country(pk=payload['country'])
             if 'gender' in payload and payload['gender'] is not None: payload['gender'] = Gender(pk=int(payload['gender']))
-            if 'languages' in payload: payload['languages'] = [Language(pk=lang["_id"]) for lang in payload['languages']]
-            if 'department' in payload and payload['department'] is not None: payload['department'] = Department(pk=int(payload['department']['_id']))
-            if 'chair' in payload and payload['chair'] is not None: payload['chair'] = Chair(pk=int(payload['chair']["_id"]))
+            if 'languages' in payload: payload['languages'] = [Language(pk=lang) for lang in payload['languages']]
+            if 'department' in payload and payload['department'] is not None: payload['department'] = Department(pk=int(payload['department']))
+            if 'chair' in payload and payload['chair'] is not None: payload['chair'] = Chair(pk=int(payload['chair']))
             if 'bio' in payload: payload["bio"] = payload['bio']
-            # if 'verified' in payload: payload["is_verified"]
-            # print(payload)
             updated = user.update(**payload)
-            print(updated)
+            print(user)
             return updated >= 1, payload
         else:
             print("Not found")
