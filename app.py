@@ -64,14 +64,17 @@ def specific_user(user_id):
                         'statusCode': 200}), 200
 
     elif request.method == 'PUT':
-        payload = request.json
+        payload = request.json['payload']
+        fields = request.json['fields']
         if 'languages[]' in payload: payload['languages'] = payload.pop('languages[]')
         payload['user_id'] = user_id
         is_updated, user = update_user(payload)
 
         if is_updated:
+            user = get_user_by_id(user_id, fields)
             return jsonify({'response': "OK",
-                        'statusCode': 200}), 200
+                            "updated_user": user,
+                            'statusCode': 200}), 200
         else:
             return jsonify({'response': BAD_REQUEST,
                             'statusCode': 400}), 400
