@@ -66,12 +66,13 @@ def specific_user(user_id):
     elif request.method == 'PUT':
         payload = request.json['payload']
         fields = request.json['fields']
+        lang = request.json['lang']
         if 'languages[]' in payload: payload['languages'] = payload.pop('languages[]')
         payload['user_id'] = user_id
         is_updated, user = update_user(payload)
 
         if is_updated:
-            user = get_user_by_id(user_id, fields)
+            user = json.loads(get_user_by_id(ObjectId(user_id), fields).to_json(lang))
             return jsonify({'response': "OK",
                             "updated_user": user,
                             'statusCode': 200}), 200
