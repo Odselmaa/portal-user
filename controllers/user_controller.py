@@ -101,6 +101,11 @@ def get_users(fields, search_keys, l, s):
     return users
 
 
+def get_users_raw(fields, l, s):
+    users = User.objects.order_by('-date_created').only(*fields).skip(s).limit(l)
+    return users
+
+
 def get_friends(user_id, fields = [], lang='en'):
     user = User.objects(id=ObjectId(user_id)).first()
     friend_list = []

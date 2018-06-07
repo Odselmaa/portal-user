@@ -171,6 +171,16 @@ def manage_friend(user_id, friend_id):
             
             return jsonify({'statusCode': 200, 'response': 'Friend deleted successfully'}), 200
 
+@app.route('/api/user/rawdata', methods=['GET'])
+def raw_data():
+    fields = request.args.get('fields', '')
+    fields = fields.split(',')
+
+    limit = int(request.args.get('limit', 10))
+    skip = int(request.args.get('skip', 0))
+    users = get_users_raw(fields, limit, skip)
+    return jsonify({'statusCode': 200, 'response': users}), 200
+
 
 @app.route('/api/department', methods=['GET'])
 # @login_required
