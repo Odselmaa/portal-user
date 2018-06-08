@@ -231,7 +231,7 @@ class User(Document):
     languages = ListField(ReferenceField(Language))
     friends = ListField(StringField(), max_length=1000)
     photos = ListField(max_length=1000)
-    profile = StringField()
+    profile = ImageField()
     access_token = EmbeddedDocumentField(AccessToken)
     gender = ReferenceField(Gender)
     date_modified = DateTimeField()
