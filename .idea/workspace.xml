@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="758e62ee-3df4-4d2d-b9d7-71bf628af939" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models.py" afterPath="$PROJECT_DIR$/models.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,10 +35,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user_controller.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="user_controller.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/user_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1395">
+            <state relative-caret-position="-45">
               <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
               <folding />
             </state>
@@ -78,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="233" column="36" lean-forward="false" selection-start-line="233" selection-start-column="36" selection-end-line="233" selection-end-column="36" />
+            <state relative-caret-position="1347">
+              <caret line="233" column="26" lean-forward="false" selection-start-line="233" selection-start-column="26" selection-end-line="233" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -127,6 +126,7 @@
       <find>api/token</find>
       <find>country</find>
       <find>409</find>
+      <find>User</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -977,14 +977,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/user_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1395">
-          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-333">
@@ -997,8 +989,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="233" column="36" lean-forward="false" selection-start-line="233" selection-start-column="36" selection-end-line="233" selection-end-column="36" />
+        <state relative-caret-position="1347">
+          <caret line="233" column="26" lean-forward="false" selection-start-line="233" selection-start-column="26" selection-end-line="233" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/user_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-45">
+          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
           <folding />
         </state>
       </provider>
