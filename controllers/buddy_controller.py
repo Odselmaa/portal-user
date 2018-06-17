@@ -13,7 +13,7 @@ def add_buddy_request(request_json):
 
 
 def get_buddies(l=10, s=10, fields=[]):
-    buddies = Buddy.objects.order_by('-created_when').only(*fields).skip(s).limit(l)
+    buddies = Buddy.objects.order_by('-created_when').only(*fields)
     return buddies
 
 
