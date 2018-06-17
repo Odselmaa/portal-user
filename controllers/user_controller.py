@@ -17,7 +17,7 @@ from models import User, AccessToken, Gender, Chair, Department, Language, Count
 def update_user(payload = {}, fields = []):
     if 'user_id' in payload:
         user_id = payload.pop('user_id')
-        print(payload)
+        # print(payload)
 
         user = User.objects(pk=user_id)
         if user is not None:
