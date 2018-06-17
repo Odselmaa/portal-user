@@ -236,7 +236,7 @@ class User(Document):
     gender = ReferenceField(Gender)
     date_modified = DateTimeField()
     date_created = DateTimeField()
-    news_tags = ListField(StringField())
+    news_tags = ListField(StringField(), default=[])
     meta = {'queryset_class': CustomQuerySet}
 
     def to_json(self, lang='en'):
@@ -307,7 +307,6 @@ class Buddy(Document):
         data['created_when'] = self.created_when.timestamp()
         data['arrival_date'] = self.arrival_date.timestamp()
         return json_util.dumps(data)
-
 
 class Report(Document):
     description = StringField()

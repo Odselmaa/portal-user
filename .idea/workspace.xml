@@ -97,7 +97,7 @@
             <entry file="file://$PROJECT_DIR$/models.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="420">
-                  <caret line="238" column="50" lean-forward="false" selection-start-line="238" selection-start-column="50" selection-end-line="238" selection-end-column="50" />
+                  <caret line="238" column="39" lean-forward="false" selection-start-line="238" selection-start-column="39" selection-end-line="238" selection-end-column="39" />
                   <folding />
                 </state>
               </provider>
@@ -1011,7 +1011,7 @@
     <entry file="file://$PROJECT_DIR$/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
-          <caret line="238" column="50" lean-forward="false" selection-start-line="238" selection-start-column="50" selection-end-line="238" selection-end-column="50" />
+          <caret line="238" column="39" lean-forward="false" selection-start-line="238" selection-start-column="39" selection-end-line="238" selection-end-column="39" />
           <folding />
         </state>
       </provider>
