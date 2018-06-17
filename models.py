@@ -239,8 +239,6 @@ class User(Document):
     news_tags = ListField(StringField())
     meta = {'queryset_class': CustomQuerySet}
 
-
-
     def to_json(self, lang='en'):
         data = self.to_mongo()
         data['_id'] = str(self.id)
@@ -283,6 +281,31 @@ class User(Document):
                 user = User.objects(id=friend).only(*['firstname', 'lastname', 'department']).first()
                 data['friends'][i] = json.loads(user.to_json(lang))
 
+        return json_util.dumps(data)
+
+    def get_buddy(self):
+        return {"id": str(self.id), "fullname": self.firstname + ' '+ self.lastname}
+
+
+class Buddy(Document):
+    user = ReferenceField(User)
+    buddy = ReferenceField(User)
+    arrival_date = DateTimeField(required=True)
+    created_when = DateTimeField(required=True)
+
+    place = StringField()
+    confirmed = BooleanField(default=False)
+    comment = StringField()
+    meta = {'queryset_class': CustomQuerySet}
+
+    def to_json(self):
+        data = self.to_mongo()
+        data['_id'] = str(self.id)
+        if self.buddy:
+            data['buddy'] = self.buddy.get_buddy()
+        data['user'] = self.user.get_buddy()
+        data['created_when'] = self.created_when.timestamp()
+        data['arrival_date'] = self.arrival_date.timestamp()
         return json_util.dumps(data)
 
 

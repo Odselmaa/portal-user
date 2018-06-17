@@ -7,8 +7,6 @@ from flask import Flask
 from werkzeug.exceptions import InternalServerError, BadRequest, MethodNotAllowed, NotFound, Unauthorized
 from mongoengine.errors import FieldDoesNotExist
 
-from controllers.counry_controller import get_country
-from controllers.gender_controller import get_gender
 from flask import jsonify, request
 import jwt
 import requests
@@ -19,6 +17,10 @@ from controllers.department_contoller import *
 from controllers.language_controller import *
 from controllers.chair_controller import *
 from controllers.report_controller import *
+from controllers.buddy_controller import *
+from controllers.counry_controller import get_country
+from controllers.gender_controller import get_gender
+
 from constants import *
 
 app = Flask(__name__)
@@ -372,6 +374,40 @@ def check_authorization(access_token):
         raise NotFound
 
 
+@app.route('/api/buddy', methods=['GET', 'POST'])
+def buddy():
+    if request.method == "GET":
+        limit = int(request.args.get('limit', 10))
+        skip = int(request.args.get('skip', 0))
+        fields = request.args.get('fields', [])
+        if fields != []:
+            fields = fields.split(',')
+        buddies = get_buddies(l=limit, s=skip, fields=fields)
+        return jsonify({'statusCode': 200, 'response': json.loads(buddies.to_json())}), 200
+
+    elif request.method == 'POST':
+        payload = request.json['payload']
+        result = add_buddy_request(payload)
+        return jsonify({
+            'response': result,
+            'statusCode': 201
+        }), 201
+
+
+@app.route('/api/buddy/<string:_id>', methods=['GET', 'PUT', 'DELETE'])
+def specific_buddy(_id):
+    if request.method == "GET":
+        buddy = get_buddy(_id)
+        return jsonify({'statusCode': 200, 'response': json.loads(buddy.to_json())}), 200
+
+    elif request.method == 'PUT':
+        pass
+
+    elif request.method == 'DELETE':
+        pass
+
+
+
 def generate_code():
     return "".join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(64))
 
@@ -381,11 +417,10 @@ def gh_500(e):
     print(e)
     return jsonify({'statusCode': 500, 'response': str(e)}), 500
 
-#
-# @app.errorhandler(Exception)
-# def gh_ex(e):
-#     print(e)
-#     return jsonify({'statusCode': 500, 'response': str(e)}), 500
+
+@app.errorhandler(Exception)
+def gh_ex(e):
+    return jsonify({'statusCode': 500, 'response': str(e)}), 500
 
 
 @app.errorhandler(FieldDoesNotExist)
@@ -400,7 +435,7 @@ def global_handler_bad_request(e):
 
 @app.errorhandler(NotFound)
 def global_handler_bad_request(e):
-    return jsonify({"statusCode": 404, "response": "User not found"}), 404
+    return jsonify({"statusCode": 404, "response": "Not found"}), 404
 
 
 @app.errorhandler(BadRequest)
