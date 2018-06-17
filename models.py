@@ -236,7 +236,7 @@ class User(Document):
     gender = ReferenceField(Gender)
     date_modified = DateTimeField()
     date_created = DateTimeField()
-    news_tags = ListField(StringField(), default=[])
+    news_tags = ListField(StringField())
     meta = {'queryset_class': CustomQuerySet}
 
     def to_json(self, lang='en'):
