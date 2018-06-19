@@ -413,7 +413,7 @@ def specific_buddy(_id):
 
 
 def add_access_token_remote(token_json):
-    response = send_request(AUTH_API_URL + "/token", 'POST', token_json)
+    response = send_request(AUTH_API_URL + "/api/token", 'POST', token_json)
     print(response)
 
 
