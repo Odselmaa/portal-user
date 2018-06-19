@@ -36,6 +36,8 @@ app.config['MONGODB_PASSWORD'] = 'SlzSc3ojy57B1L1s'
 db = MongoEngine()
 db.init_app(app)
 
+AUTH_API_URL = 'http://127.0.0.1:5002/'
+
 def only_admin(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -84,7 +86,7 @@ def specific_user(user_id):
 
 
 @app.route('/api/user/<string:user_id>/block', methods=['POST'])
-@only_admin
+# @only_admin
 def block_user(user_id):
     if request.method == 'POST':
         should_block = request.json['blocked']
@@ -333,7 +335,9 @@ def authenticate():
             if user is not None and user.password == user_json["password"]:
                 code = generate_code()
                 result, access_token = add_access_token(user, code)
-                return jsonify({"response": {"access_token": json.loads(access_token.to_json()), "user_id":str(user.pk)},
+                token_json = json.loads(access_token.to_json())
+                add_access_token_remote(token_json)
+                return jsonify({"response": {"access_token": token_json, "user_id":str(user.pk)},
                                 "statusCode": 200}), 200
             else:
                 return jsonify({"response": "User not found",
@@ -406,6 +410,11 @@ def specific_buddy(_id):
     elif request.method == 'DELETE':
         pass
 
+
+
+def add_access_token_remote(token_json):
+    response = send_request(AUTH_API_URL, 'POST', token_json)
+    print(response)
 
 
 def generate_code():
