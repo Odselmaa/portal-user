@@ -36,7 +36,7 @@ app.config['MONGODB_PASSWORD'] = 'SlzSc3ojy57B1L1s'
 db = MongoEngine()
 db.init_app(app)
 
-AUTH_API_URL = 'http://127.0.0.1:5002/'
+AUTH_API_URL = 'https://portal-auth.herokuapp.com'
 
 def only_admin(f):
     @wraps(f)
@@ -172,8 +172,8 @@ def manage_friend(user_id, friend_id):
             friend = get_user_by_id(friend_id, [])
             update1 = user1.update(pull__friends=friend_id)
             update2 = friend.update(pull__friends=user_id)
-            
             return jsonify({'statusCode': 200, 'response': 'Friend deleted successfully'}), 200
+
 
 @app.route('/api/user/rawdata', methods=['GET'])
 def raw_data():
@@ -413,7 +413,7 @@ def specific_buddy(_id):
 
 
 def add_access_token_remote(token_json):
-    response = send_request(AUTH_API_URL, 'POST', token_json)
+    response = send_request(AUTH_API_URL + "/token", 'POST', token_json)
     print(response)
 
 
