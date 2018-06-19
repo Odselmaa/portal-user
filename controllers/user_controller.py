@@ -59,8 +59,6 @@ def add_user(user_json):
     return {'user_id': str(user.id)}
 
 
-
-
 def add_access_token(user, token):
     access_token = AccessToken(token=token,
                                provider='this',

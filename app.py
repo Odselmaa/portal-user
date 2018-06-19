@@ -336,6 +336,7 @@ def authenticate():
                 code = generate_code()
                 result, access_token = add_access_token(user, code)
                 token_json = json.loads(access_token.to_json())
+                token_json['user_id'] = str(user.id)
                 add_access_token_remote(token_json)
                 return jsonify({"response": {"access_token": token_json, "user_id":str(user.pk)},
                                 "statusCode": 200}), 200
@@ -411,10 +412,9 @@ def specific_buddy(_id):
         pass
 
 
-
 def add_access_token_remote(token_json):
     response = send_request(AUTH_API_URL + "/api/token", 'POST', token_json)
-    print(response)
+    return response
 
 
 def generate_code():
