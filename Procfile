@@ -1,1 +1,1 @@
-web: gunicorn app:app --threads 2
+web: gunicorn app:app --threads -w 4 --threads 2
