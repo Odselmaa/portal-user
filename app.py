@@ -27,7 +27,7 @@ app = Flask(__name__)
 # mongodb://admin_od:SlzSc3ojy57B1L1s@cluster0-shard-00-00-prwwe.mongodb.net:27017,cluster0-shard-00-01-prwwe.mongodb.net:27017,cluster0-shard-00-02-prwwe.mongodb.net:27017/test?replicaSet=Cluster0-shard-0
 
 app.config['MONGODB_DB'] = 'Portal'
-app.config['MONGODB_HOST'] = 'mongodb://admin_od:SlzSc3ojy57B1L1s@portal-shard-00-00-prwwe.mongodb.net:27017,portal-shard-00-01-prwwe.mongodb.net:27017,portal-shard-00-02-prwwe.mongodb.net:27017/test?ssl=true&replicaSet=Portal-shard-0&authSource=admin&retryWrites=true'
+app.config['MONGODB_HOST'] = 'mongodb://admin_od:SlzSc3ojy57B1L1s@portal-shard-00-00-prwwe.mongodb.net:27017,portal-shard-00-01-prwwe.mongodb.net:27017,portal-shard-00-02-prwwe.mongodb.net:27017/Portal?ssl=true&replicaSet=Portal-shard-0&authSource=admin&retryWrites=true'
     # 'mongodb://admin_odko:WinniePooh@portalinternational-shard-00-00-3b6lw.mongodb.net:27017,' \
     #                   'portalinternational-shard-00-01-3b6lw.mongodb.net:27017,' \
     #                   'portalinternational-shard-00-02-3b6lw.mongodb.net:27017/Portal?ssl=true&replicaSet=PortalInternational-shard-0&authSource=admin'
