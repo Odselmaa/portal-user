@@ -150,7 +150,7 @@ class Department(Document):
             return {'_id':self._id, 'code':self.code, 'name':self.name}
         else:
             t = [item for item in self.translation if item["language"] == lang]
-            return {'_id':self._id, 'code':self.translation[0].code, 'name':self.t[0].name}
+            return {'_id':self._id, 'code':self.translation[0].code, 'name':t[0].name}
 
     def to_json(self, lang='en', fields=[]):
         data = {}
@@ -185,7 +185,7 @@ class Chair(Document):
             return {'_id':self._id, 'code':self.code, 'name':self.name}
         else:
             t = [item for item in self.translation if item["language"] == lang]
-            return {'_id':self._id, 'code':self.translation[0].code, 'name':self.t[0].name}
+            return {'_id':self._id, 'code':self.translation[0].code, 'name':t[0].name}
 
 
     def to_json(self, lang='en', fields=[]):
@@ -216,7 +216,7 @@ class Role(Document):
             return {'_id':self.id, 'name': self.name}
         else:
             t = [item for item in self.translation if item["language"] == lang]
-            return {'_id':self.id, 'name': self.t[0].name}
+            return {'_id':self.id, 'name': t[0].name}
 
 
 class User(Document):
