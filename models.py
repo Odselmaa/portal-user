@@ -84,7 +84,8 @@ class Country(Document):
         if lang == 'en':
             return {'_id':self._id, 'name':self.name}
         else:
-            return {'_id':self._id, 'name':self.translation[0].name}
+            t = [item for item in self.translation if item["language"] == lang]
+            return {'_id':self._id,  'name': t[0].name }
 
 
 
@@ -107,7 +108,8 @@ class Gender(Document):
         if lang == 'en':
             return {'_id':self._id, 'name':self.name}
         else:
-            return {'_id':self._id, 'name':self.translation[0].name}
+            t = [item for item in self.translation if item["language"] == lang]
+            return {'_id':self._id, 'name': t[0].name }
 
 
 
@@ -147,7 +149,8 @@ class Department(Document):
         if lang == 'en':
             return {'_id':self._id, 'code':self.code, 'name':self.name}
         else:
-            return {'_id':self._id, 'code':self.translation[0].code, 'name':self.translation[0].name}
+            t = [item for item in self.translation if item["language"] == lang]
+            return {'_id':self._id, 'code':self.translation[0].code, 'name':self.t[0].name}
 
     def to_json(self, lang='en', fields=[]):
         data = {}
@@ -181,7 +184,8 @@ class Chair(Document):
         if lang == 'en':
             return {'_id':self._id, 'code':self.code, 'name':self.name}
         else:
-            return {'_id':self._id, 'code':self.translation[0].code, 'name':self.translation[0].name}
+            t = [item for item in self.translation if item["language"] == lang]
+            return {'_id':self._id, 'code':self.translation[0].code, 'name':self.t[0].name}
 
 
     def to_json(self, lang='en', fields=[]):
@@ -211,7 +215,8 @@ class Role(Document):
         if lang == 'en':
             return {'_id':self.id, 'name': self.name}
         else:
-            return {'_id':self.id, 'name': self.translation[0].name}
+            t = [item for item in self.translation if item["language"] == lang]
+            return {'_id':self.id, 'name': self.t[0].name}
 
 
 class User(Document):
