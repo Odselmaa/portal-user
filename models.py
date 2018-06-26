@@ -64,7 +64,9 @@ class Language(Document):
         if lang == 'en':
             return {'_id':self._id, 'native':self.native_name,'name':self.name }
         else:
-            return {'_id':self._id, 'native':self.native_name, 'name':self.translation[0].name}
+            t = [item for item in self.translation if item["language"] == lang]
+
+            return {'_id':self._id, 'native':self.native_name, 'name': t[0].name}
 
 
 class Country(Document):
@@ -269,6 +271,7 @@ class User(Document):
 
         if 'languages' in data:
             langs = []
+            print(self.languages)
             for l in self.languages:
                 langs.append(l.get_l(lang))
             data['languages'] = langs
