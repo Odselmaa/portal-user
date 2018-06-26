@@ -7,7 +7,7 @@ def get_gender_by_id(_id, lang='en'):
         item = json.loads(item.to_json())[0]
         return item
 
-    elif lang == 'ru':
+    elif lang:
         item = Gender.objects(_id=_id, translation__language=lang).only("translation").exclude("_id")[0]
         item = item2dict(item)
         item = translation_unify(item, lang)
@@ -20,7 +20,7 @@ def get_gender(lang):
         items = Gender.objects().exclude("translation")
         items = items2dict(items)
 
-    elif lang == 'ru':
+    elif lang:
         items = Gender.objects(translation__language=lang).exclude("name")
         items = items2dict(items)
         items = translations_unify(items, lang)

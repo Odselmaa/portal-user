@@ -11,7 +11,7 @@ def get_language_by_id(_id, lang):
         item = Language.objects(_id=_id).exclude("translation").first()
         item = item2dict(item)
 
-    elif lang == 'ru':
+    elif lang is not None:
         item = Language.objects(_id=_id, translation__language=lang).only("translation")
         if item:
             item = item[0]
@@ -28,11 +28,11 @@ def get_languages(lang):
         items = Language.objects().exclude("translation").order_by("name")
         items = items2dict(items)
 
-    elif lang == 'ru':
+    elif lang is not None:
         items = Language.objects(translation__language=lang).exclude("name").exclude("language")
         items = items2dict(items)
         items = translations_unify(items, lang)
     else:
-        raise BadRequest
+        item = []
 
     return items

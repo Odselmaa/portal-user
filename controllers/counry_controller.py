@@ -13,4 +13,6 @@ def get_country(fields=[], lang='en'):
         items = items2dict(items)
 
         items = translations_unify(items, lang)
+    else:
+        items = []
     return items
