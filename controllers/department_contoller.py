@@ -21,6 +21,7 @@ def get_dep_by_code(code, lang='en', fields=[]):
 
     elif lang:
         item = Department.objects(code=code, translation__language=lang).first()
+        print(item.to_json())
 
     return item
 

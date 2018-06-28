@@ -20,6 +20,7 @@ from controllers.report_controller import *
 from controllers.buddy_controller import *
 from controllers.counry_controller import get_country
 from controllers.gender_controller import get_gender
+from controllers.gender_controller import get_gender
 
 from constants import *
 
@@ -420,48 +421,48 @@ def add_access_token_remote(token_json):
 def generate_code():
     return "".join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(64))
 
-#
-# @app.errorhandler(InternalServerError)
-# def gh_500(e):
-#     print(e)
-#     return jsonify({'statusCode': 500, 'response': str(e)}), 500
-#
-#
-# @app.errorhandler(Exception)
-# def gh_ex(e):
-#     print(e)
-#     return jsonify({'statusCode': 500, 'response': str(e)}), 500
-#
-#
-# @app.errorhandler(FieldDoesNotExist)
-# def gh_file_doesnt_exist(e):
-#     return jsonify({'statusCode': 400, 'response': str(e)}), 400
-#
-#
-# @app.errorhandler(Unauthorized)
-# def global_handler_bad_request(e):
-#     return jsonify({"statusCode": 401, "response": "Unauthorized"}), 401
-#
-#
-# @app.errorhandler(NotFound)
-# def global_handler_bad_request(e):
-#     return jsonify({"statusCode": 404, "response": "Not found"}), 404
-#
-#
-# @app.errorhandler(BadRequest)
-# def gh_bad_request(e):
-#     return jsonify({'statusCode': 400, 'response': str(e)}), 400
-#
-#
-# @app.errorhandler(bson.errors.InvalidId)
-# def gh_invalid_id(e):
-#     return jsonify({'statusCode': 404, 'response': 'Not found'}), 404
-#
-#
-# @app.errorhandler(MethodNotAllowed)
-# def gh_not(e):
-#
-#     return jsonify({'statusCode': 400, 'response': str(e)}), 400
+
+@app.errorhandler(InternalServerError)
+def gh_500(e):
+    print(e)
+    return jsonify({'statusCode': 500, 'response': str(e)}), 500
+
+
+@app.errorhandler(Exception)
+def gh_ex(e):
+    print(e)
+    return jsonify({'statusCode': 500, 'response': str(e)}), 500
+
+
+@app.errorhandler(FieldDoesNotExist)
+def gh_file_doesnt_exist(e):
+    return jsonify({'statusCode': 400, 'response': str(e)}), 400
+
+
+@app.errorhandler(Unauthorized)
+def global_handler_bad_request(e):
+    return jsonify({"statusCode": 401, "response": "Unauthorized"}), 401
+
+
+@app.errorhandler(NotFound)
+def global_handler_bad_request(e):
+    return jsonify({"statusCode": 404, "response": "Not found"}), 404
+
+
+@app.errorhandler(BadRequest)
+def gh_bad_request(e):
+    return jsonify({'statusCode': 400, 'response': str(e)}), 400
+
+
+@app.errorhandler(bson.errors.InvalidId)
+def gh_invalid_id(e):
+    return jsonify({'statusCode': 404, 'response': 'Not found'}), 404
+
+
+@app.errorhandler(MethodNotAllowed)
+def gh_not(e):
+
+    return jsonify({'statusCode': 400, 'response': str(e)}), 400
 
 
 def send_request(URL, method, json):
