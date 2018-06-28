@@ -16,6 +16,8 @@ def get_dep_by_id(_id, lang='en', fields=[]):
 
 def get_dep_by_code(code, lang='en', fields=[]):
     item = {}
+    print(lang)
+
     if lang == 'en':
         item = Department.objects(code=code).only(*fields).exclude('translation').first()
 
