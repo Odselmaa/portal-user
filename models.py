@@ -153,12 +153,14 @@ class Department(Document):
             print(t)
             return {'_id':self._id, 'code':t[0].code, 'name':t[0].name}
 
+
     def to_json(self, lang='en', fields=[]):
         data = {}
         if lang != 'en':
-            if 'name' in fields: data['name'] = self.translation[0].name
-            if 'code' in fields: data['code'] = self.translation[0].code
-            if 'description' in fields: data['description'] = self.translation[0].description
+            t = [item for item in self.translation if item["language"] == lang]
+            if 'name' in fields: data['name'] = t[0].name
+            if 'code' in fields: data['code'] = t[0].code
+            if 'description' in fields: data['description'] = t[0].description
             if 'link' in fields: data['link'] =  self.link
 
             data['_id'] = self._id
