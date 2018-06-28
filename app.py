@@ -213,7 +213,7 @@ def spec_department(id_or_code):
 
     if dep:
         
-        return jsonify({'response': dep.to_json(lang, fields), 'statusCode': 200}), 200
+        return jsonify({'response': dep, 'statusCode': 200}), 200
     else:
         raise NotFound
 
